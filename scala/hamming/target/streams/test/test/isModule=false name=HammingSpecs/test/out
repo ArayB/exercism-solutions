@@ -1,0 +1,9 @@
+[0m[[0minfo[0m] [0m[32mHammingSpecs:[0m[0m
+[0m[[0minfo[0m] [0m[32m- should detect no difference between empty strands[0m[0m
+[0m[[0minfo[0m] [0m[32m- should detect no difference between identical strands[0m[0m
+[0m[[0minfo[0m] [0m[31m- should detect complete hamming distance in small strand *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  0 was not equal to 3 (hamming_test.scala:13)[0m[0m
+[0m[[0minfo[0m] [0m[33m- should give hamming distance in off by one strand (pending)[0m[0m
+[0m[[0minfo[0m] [0m[33m- should give small hamming distance in middle somewhere (pending)[0m[0m
+[0m[[0minfo[0m] [0m[33m- should give a larger distance (pending)[0m[0m
+[0m[[0minfo[0m] [0m[32m- should be undefined for strands of unequal length[0m[0m
