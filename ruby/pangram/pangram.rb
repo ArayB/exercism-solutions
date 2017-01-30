@@ -1,7 +1,9 @@
 class Pangram
-  def self.pangram?(input)
-    input = input.downcase
-    ('a'..'z').all? { |letter| input.include?(letter) }
+  ENGLISH_ALPHABET = ('a'..'z').freeze
+
+  def self.pangram?(sentence)
+    sentence = sentence.downcase
+    ENGLISH_ALPHABET.all? { |letter| sentence.include?(letter) }
   end
 end
 
