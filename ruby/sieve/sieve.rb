@@ -1,22 +1,21 @@
+require 'pry'
 class Sieve
-  def initialize(n)
-    @range = (2..n).to_a
-    @primes = []
+  attr_reader :limit
+
+  def initialize(limit)
+    @limit = limit
+    @range = (2..limit).to_a
   end
 
   def primes
-    remove_multiples while @range.length.positive?
-    @primes
-  end
-
-  private
-
-  def remove_multiples
-    @primes << @range.shift
-    @range = @range.reject { |x| (x % @primes.last).zero? }
+    (2..Math.sqrt(limit)).each do |num| 
+      @range -= ((num * num)..limit).step(num).to_a if @range.include?(num)
+    end
+    @range
   end
 end
 
 module BookKeeping
   VERSION = 1
 end
+
