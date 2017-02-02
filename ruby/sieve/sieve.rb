@@ -1,4 +1,3 @@
-require 'pry'
 class Sieve
   attr_reader :limit
 
