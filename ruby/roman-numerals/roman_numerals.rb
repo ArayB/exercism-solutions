@@ -1,42 +1,39 @@
 class Numeric
+  MAP = {
+    hundreds: { single: 'C', mid: 'D', upper: 'M' },
+    tens: { single: 'X', mid: 'L', upper: 'C' },
+    digits: { single: 'I', mid: 'V', upper: 'X' }
+  }.freeze
+
   def to_roman
     result = ''
     digits = self.to_s.chars.map(&:to_i)
 
-    # handle 1000s
     if digits.length == 4
       result += 'M' * digits.first
     end
 
-    # handle 100s
-    if digits.length >= 3
-      result = convert_to_roman(digits[-3], 'C', 'D', 'M', result)
-    end
-
-    # handle 10s
-    if digits.length >= 2
-      result = convert_to_roman(digits[-2], 'X', 'L', 'C', result)
-    end
-
-    # handle 1s
-    result = convert_to_roman(digits[-1], 'I', 'V', 'X', result)
+    result = convert_to_roman(digits[-3], MAP[:hundreds], result)
+    result = convert_to_roman(digits[-2], MAP[:tens], result)
+    result = convert_to_roman(digits[-1], MAP[:digits], result)
     result
   end
 
   private
 
-  def convert_to_roman(val, single, mid, upper, result_string)
+  def convert_to_roman(val, map, result_string)
+    return result_string if val.nil?
     if val == 9
-      result_string += "#{single}#{upper}"
+      result_string += "#{map[:single]}#{map[:upper]}"
       val = 0
     elsif val >= 5
-      result_string += mid
+      result_string += map[:mid]
       val -= 5
     elsif val == 4
-      result_string += "#{single}#{mid}"
+      result_string += "#{map[:single]}#{map[:mid]}"
       val = 0
     end
-    result_string += single * val
+    result_string += map[:single] * val
     result_string
   end
 end
