@@ -1,6 +1,7 @@
 class BeerSong
   def verse(n)
     return no_bottles_verse if n.zero?
+    return single_remaining_verse(n) if n == 2
     return single_bottle_verse if n == 1
     standard_verse(n)
   end
@@ -19,7 +20,14 @@ class BeerSong
     "#{n} bottles of beer on the wall, " +
       "#{n} bottles of beer.\n" +
       'Take one down and pass it around, ' +
-      "#{n - 1} bottle#{n > 2 ? 's' : ''} of beer on the wall.\n"
+      "#{n - 1} bottles of beer on the wall.\n"
+  end
+
+  def single_remaining_verse(n)
+    "#{n} bottles of beer on the wall, " +
+      "#{n} bottles of beer.\n" +
+      'Take one down and pass it around, ' +
+      "1 bottle of beer on the wall.\n"
   end
 
   def single_bottle_verse
