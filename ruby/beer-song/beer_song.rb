@@ -1,8 +1,9 @@
+# Makes a song about beer.
 class BeerSong
   def verse(n)
-    return no_bottles_verse if n.zero?
-    return single_remaining_verse(n) if n == 2
-    return single_bottle_verse if n == 1
+    return two_verse if n == 2
+    return one_verse if n == 1
+    return none_verse if n.zero?
     standard_verse(n)
   end
 
@@ -23,21 +24,21 @@ class BeerSong
       "#{n - 1} bottles of beer on the wall.\n"
   end
 
-  def single_remaining_verse(n)
-    "#{n} bottles of beer on the wall, " +
-      "#{n} bottles of beer.\n" +
+  def two_verse
+    "2 bottles of beer on the wall, " +
+      "2 bottles of beer.\n" +
       'Take one down and pass it around, ' +
       "1 bottle of beer on the wall.\n"
   end
 
-  def single_bottle_verse
+  def one_verse
     '1 bottle of beer on the wall, ' +
       "1 bottle of beer.\n" +
       'Take it down and pass it around, ' +
       "no more bottles of beer on the wall.\n"
   end
 
-  def no_bottles_verse
+  def none_verse
     'No more bottles of beer on the wall, ' +
       "no more bottles of beer.\n" +
       'Go to the store and buy some more, ' +
