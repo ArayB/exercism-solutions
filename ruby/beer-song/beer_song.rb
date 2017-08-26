@@ -1,8 +1,11 @@
 # Makes a song about beer.
 class BeerSong
   def verse(n)
-    return none_verse if n.zero?
-    standard_verse(n)
+    "#{quantity(n).capitalize} #{container(n)} of beer on the wall, " \
+      "#{quantity(n)} #{container(n)} of beer.\n" \
+      "#{action(n)}" \
+      "#{quantity(next_amount(n))} #{container(next_amount(n))}" \
+      " of beer on the wall.\n"
   end
 
   def verses(start_verse, end_verse)
@@ -14,13 +17,6 @@ class BeerSong
   end
 
   private
-
-  def standard_verse(n)
-    "#{n} #{container(n)} of beer on the wall, " +
-      "#{n} #{container(n)} of beer.\n" +
-      "Take #{pronoun(n)} down and pass it around, " +
-      "#{quantity(n - 1)} #{container(n - 1)} of beer on the wall.\n"
-  end
 
   def container(number)
     if number == 1
@@ -38,7 +34,7 @@ class BeerSong
     end
   end
 
-  def pronoun(number = :FIXME)
+  def pronoun(number)
     if number == 1
       'it'
     else
@@ -46,12 +42,20 @@ class BeerSong
     end
   end
 
+  def action(number)
+    if number.zero?
+      'Go to the store and buy some more, '
+    else
+      "Take #{pronoun(number)} down and pass it around, "
+    end
+  end
 
-  def none_verse
-    'No more bottles of beer on the wall, ' +
-      "no more bottles of beer.\n" +
-      'Go to the store and buy some more, ' +
-      "99 bottles of beer on the wall.\n"
+  def next_amount(number)
+    if number.zero?
+      99
+    else
+      number - 1
+    end
   end
 end
 
