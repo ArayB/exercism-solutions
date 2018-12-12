@@ -1,10 +1,11 @@
 # Makes a song about beer.
 class BeerSong
   def verse(n)
-    return two_verse if n == 2
-    return one_verse if n == 1
-    return none_verse if n.zero?
-    standard_verse(n)
+    "#{quantity(n).capitalize} #{container(n)} of beer on the wall, " \
+      "#{quantity(n)} #{container(n)} of beer.\n" \
+      "#{action(n)}" \
+      "#{quantity(next_amount(n))} #{container(next_amount(n))}" \
+      " of beer on the wall.\n"
   end
 
   def verses(start_verse, end_verse)
@@ -17,32 +18,44 @@ class BeerSong
 
   private
 
-  def standard_verse(n)
-    "#{n} bottles of beer on the wall, " +
-      "#{n} bottles of beer.\n" +
-      'Take one down and pass it around, ' +
-      "#{n - 1} bottles of beer on the wall.\n"
+  def container(number)
+    if number == 1
+      'bottle'
+    else
+      'bottles'
+    end
   end
 
-  def two_verse
-    "2 bottles of beer on the wall, " +
-      "2 bottles of beer.\n" +
-      'Take one down and pass it around, ' +
-      "1 bottle of beer on the wall.\n"
+  def quantity(number)
+    if number.zero?
+      'no more'
+    else
+      number.to_s
+    end
   end
 
-  def one_verse
-    '1 bottle of beer on the wall, ' +
-      "1 bottle of beer.\n" +
-      'Take it down and pass it around, ' +
-      "no more bottles of beer on the wall.\n"
+  def pronoun(number)
+    if number == 1
+      'it'
+    else
+      'one'
+    end
   end
 
-  def none_verse
-    'No more bottles of beer on the wall, ' +
-      "no more bottles of beer.\n" +
-      'Go to the store and buy some more, ' +
-      "99 bottles of beer on the wall.\n"
+  def action(number)
+    if number.zero?
+      'Go to the store and buy some more, '
+    else
+      "Take #{pronoun(number)} down and pass it around, "
+    end
+  end
+
+  def next_amount(number)
+    if number.zero?
+      99
+    else
+      number - 1
+    end
   end
 end
 
